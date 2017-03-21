@@ -34,11 +34,38 @@ and $\bm{v} = \begin{pmatrix} \hat{\bm{v}} & 0 & 1 \end{pmatrix}^\top$
 \end{itemize}
 
 \begin{mythm*}
-Let $\bm{Q} = \left[ q(i,j) \right]_{n\times n} \triangleq (\bm{I} - c\bm{P})^{-1}$. $\forall i\neq j$, there is
+Let
+\[
+\bm{Q} = \left[ q(i,j) \right] \triangleq (\bm{I} - c\bm{P})^{-1}.
+\]
+$\forall i\neq j$, there is
 \[
 \mathrm{ep}(i\rightarrow j) = \frac{q(i,j)}{q(i,i)q(j,j) - q(i,j)q(j,i)}.
 \]
 \end{mythm*}
+
+\begin{itemize}
+\item Fast solution to all-pair proximities
+\begin{itemize}
+\item Compute $\bm{Q} = (\bm{I} - c\bm{P})^{-1}$
+\item For all pair of nodes i and j, compute $\mathrm{Prox}(i,j) = \frac{q(i,j)}{q(i,i)q(j,j) - q(i,j)q(j,i)}$
+\end{itemize}
+\item Time complexity $\Theta(\mathrm{1\ matrix\ inversion}) + \Theta(n^2)$
+\end{itemize}
+
+\begin{itemize}
+\item When only the proximity of one pair of nodes
+\begin{itemize}
+\item Only need two columns of $\bm{Q}$
+\item Taylor expansion
+\[(\bm{I} - c\bm{P})^{-1} = \bm{I} + c\bm{P} + (c\bm{P})^2 + \cdots\]
+\item Computing $i$-th column of $\bm{Q}$
+\begin{align*}
+\bm{Q}\bm{e}_i &= (\bm{I} - c\bm{P})^{-1} \bm{e}_i = \bm{e}_i + c\bm{P} \bm{e}_i + (c\bm{P})^2 \bm{e}_i + \cdots
+\end{align*}
+\end{itemize}
+\item Time complexity $\Theta\left(t(n + m)\right)$, where $t$ is the number of iterations
+\end{itemize}
 
 \begin{mylem*}
 The expected time $r_i$ for a random walk starting at node $i$ to return to $i$ is the reciprocal of the stationary probability of $i$.
