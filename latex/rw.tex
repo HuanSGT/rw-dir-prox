@@ -1,0 +1,65 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{bm}
+
+\newtheorem*{mythm*}{Theorem}
+\newtheorem*{mylem*}{Lemma}
+\newtheorem*{mycor*}{Corollary}
+
+\begin{document}
+
+\begin{mylem*}
+The expected time $r_i$ for a random walk starting at node $i$ to return to $i$ is the reciprocal of the stationary probability of $i$.
+That is
+\[
+r_i = \frac{1}{\pi_i}.
+\]
+\end{mylem*}
+
+\begin{itemize}
+\item Intuitively
+\begin{itemize}
+\item A long walk always ends up in stationary distribution $\bm{\pi}$
+\item Suppose the walk length is $T$, then the expected number of times it visits $i$ is $\pi_i \cdot T$
+\item The average length between two visits is $\frac{T}{\pi_i \cdot T} = \frac{1}{\pi_i}$
+\item A rigorous proof requires the Strong Law of Large Numbers
+\end{itemize}
+\end{itemize}
+
+\begin{mythm*}
+The probability that a random walk starting at node $i$ visits $j$ before returning to $i$, which equals $\mathrm{ep}(i\rightarrow j)$, satisfies
+\[
+\mathrm{ep}(i\rightarrow j)c(i,j) = \frac{1}{\pi_i},
+\]
+where $c(i,j)$ is the commute time between $i$ and $j$.
+\end{mythm*}
+
+\begin{itemize}
+\item Proof
+\begin{itemize}
+\item Consider a random walk $w$ starting at $i$, and random variables
+\begin{itemize}
+\item $X = $ the first time $w$ returns to $i$
+\item $Y = $ the first time $w$ returns to $i$ after visiting $j$
+\end{itemize}
+\item By definition $E(X) = \frac{1}{\pi_i}$ and $E(Y) = c(i,j)$
+\item Clearly $X \leq Y$, and $\Pr\left[X = Y\right] = p \triangleq \mathrm{ep}(i\rightarrow j)$
+\begin{itemize}
+\item $E(Y - X) = p\cdot 0 + (1 - p)\cdot E(Y) = (1-p) c(i,j)$
+\end{itemize}
+\item Also $E(Y - X) = E(Y) - E(X) = c(i,j) - \frac{1}{\pi_i}$
+\end{itemize}
+\end{itemize}
+
+\begin{itemize}
+\item $\mathrm{ep}(i\rightarrow j) + \mathrm{ep}(j\rightarrow i) = \frac{1}{c(i,j)}\left(\frac{1}{\pi_i} + \frac{1}{\pi_j}\right)$
+\item Recall that $h(i,j)$ is small whenever $\pi_j$ is large, which is bad for personalization
+\begin{itemize}
+\item Sarkar et al. (2008) alleviate this by restricting the length of random walk
+\item Tong et al. (2007) alleviate this by reducing the dependence on stationary distribution
+\end{itemize}
+\end{itemize}
+
+\end{document}
