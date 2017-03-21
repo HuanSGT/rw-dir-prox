@@ -3,12 +3,42 @@
 \usepackage{amssymb}
 \usepackage{amsthm}
 \usepackage{bm}
+\usepackage{dsfont}
 
 \newtheorem*{mythm*}{Theorem}
 \newtheorem*{mylem*}{Lemma}
 \newtheorem*{mycor*}{Corollary}
 
 \begin{document}
+
+\begin{itemize}
+\item The generalized voltage $v_k$
+\begin{itemize}
+\item Pr[A random walk starting at $k$ visits $j$ before $i$]
+\end{itemize}
+\item Calculating $\bm{v} \triangleq (v_1\ v_2\ \cdots\ v_n)^\top$
+\begin{itemize}
+\item $v_i = 0$ and $v_j = 1$
+\item $\forall k\neq i, j$, $v_k = \sum\limits_l p_{kl} \cdot v_l$
+\item Split
+$\bm{P} = \begin{pmatrix}
+\hat{\bm{P}} & \bm{c}_i & \bm{c}_j \\
+\bm{r}_i^\top & 0 & p(i,j) \\
+\bm{r}_j^\top & p(j,i) & 0
+\end{pmatrix}$
+and $\bm{v} = \begin{pmatrix} \hat{\bm{v}} & 0 & 1 \end{pmatrix}^\top$
+\item Then $\hat{\bm{v}} = \hat{\bm{P}} \hat{\bm{v}} + \bm{r}_j \ \Rightarrow\ \hat{\bm{v}} = (\bm{I} - \hat{\bm{P}})^{-1} \bm{r}_j$
+\end{itemize}
+\item $\mathrm{ep}(i\rightarrow j) = \sum\limits_k p_{ik} \cdot v_k = \bm{r}_i^\top (\bm{I} - \hat{\bm{P}})^{-1} \bm{c}_j + p(i,j)$
+\item Computing all $\mathrm{ep}(i\rightarrow j)$ requires $\Theta(n^2)$ matrix inversions
+\end{itemize}
+
+\begin{mythm*}
+Let $\bm{Q} = \left[ q(i,j) \right]_{n\times n} \triangleq (\bm{I} - c\bm{P})^{-1}$. $\forall i\neq j$, there is
+\[
+\mathrm{ep}(i\rightarrow j) = \frac{q(i,j)}{q(i,i)q(j,j) - q(i,j)q(j,i)}.
+\]
+\end{mythm*}
 
 \begin{mylem*}
 The expected time $r_i$ for a random walk starting at node $i$ to return to $i$ is the reciprocal of the stationary probability of $i$.
